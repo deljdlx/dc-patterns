@@ -1,6 +1,6 @@
 services:
   patterns:
-    build: ./compose
+    image: nginx:alpine
     container_name: patterns
     restart: always
     env_file:
