@@ -1,0 +1,286 @@
+:root {
+  --bg: #1e1e2f;
+  --card: #2c2c3e;
+  --text: #f4f4f4;
+  --accent: #ff6f61;
+  --border: #444;
+  --mono: 'Fira Code', monospace;
+}
+
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #333;
+  margin: 20px;
+  overflow:hidden
+}
+
+h1 {
+  text-align: center;
+  color: #fff;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeIn 0.3s ease;
+}
+
+.popup {
+  background-color: #2228;
+  color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  /* max-width: 500px; */
+  width: 90%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  transform: scale(0.9);
+  animation: popupIn 0.3s ease forwards;
+
+  max-height: 90%;
+  overflow-y: auto;
+}
+
+.popup h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+}
+
+.popup p {
+  margin: 0.5rem 0;
+}
+
+.popup-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; } to { opacity: 1; }
+}
+
+@keyframes popupIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+
+
+
+
+
+.super-header-wrapper, .header-wrapper {
+  display: grid;
+  grid-template-columns: 1fr repeat(8, 1fr);
+  max-width: 1260px;
+  margin: auto;
+  text-align: center;
+}
+
+.super-header {
+  border-radius: 6px 6px 0 0;
+  color: white;
+  gap: 6px;
+}
+.super-header, .header {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-column: span 8;
+  margin-bottom: 0;
+  font-size: 1rem;
+}
+.super-header div {
+  background: #222;
+  padding: 10px 0;
+  border-radius: 6px 6px 0 0;
+}
+
+.header {
+  text-align: center;
+  font-weight: bold;
+  gap: 6px;
+
+}
+
+.header div {
+  padding: 10px 0;
+  background-color: #aaa;
+}
+
+
+
+
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr repeat(8, 1fr);
+  gap: 6px;
+  max-width: 1260px;
+  margin: 6px auto;
+  align-items: stretch;
+}
+.period-label {
+  text-align: right;
+  font-weight: bold;
+  font-size: 0.85rem;
+  color: #fff;
+  padding-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+
+/* Pattern blocks */
+.pattern {
+  position: relative;
+  border-radius: 12px;
+  padding: 10px 6px;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 75px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.pattern-name {
+  font-size: 1rem;
+  font-weight: normal;
+  margin-top: 4px;
+}
+
+.pattern:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  filter: brightness(1.1);
+}
+
+
+.pattern.gof::before {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  content: '⭐';
+}
+
+.pattern.risky::after {
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  content: '⚠️';
+}
+
+
+
+
+.pattern:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* Couleurs par famille */
+.column-1 { background-color: #6C5CE7; }
+.column-2 { background-color: #A29BFE; }
+
+.column-3 { background-color: #00B894; }
+.column-4 { background-color: #00CEC9; }
+.column-5 { background-color: #81ECEC; }
+
+.column-6 { background-color: #E17055; }
+.column-7 { background-color: #E84393; }
+.column-8 { background-color: #FAB1A0; }
+
+
+/* ============================================== */
+
+
+/* Ajoute à la fin de ton CSS existant */
+
+@media screen and (max-width: 764px) {
+  body {
+    margin: 5px;
+    overflow: auto;
+  }
+
+  .super-header, .header {
+    font-size: 0.5rem;
+  }
+
+  .header div {
+    writing-mode: vertical-rl;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .period-label {
+    font-size: 0.7rem;
+    writing-mode: vertical-rl;
+    justify-content: center;
+    align-items: flex-start;
+    padding-right: 0;
+  }
+
+  .pattern {
+    font-size: 0.5rem;
+    writing-mode: vertical-rl;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  body {
+    margin: 5px;
+  }
+
+  .super-header, .header {
+    font-size: 0.5rem;
+  }
+
+  .header div {
+    writing-mode: horizontal-tb !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .period-label {
+    font-size: 0.7rem;
+    writing-mode: vertical-rl !important;
+    justify-content: center;
+    align-items: flex-start;
+    padding-right: 0;
+  }
+
+  .pattern {
+    font-size: 0.5rem;
+    writing-mode: horizontal-tb !important;
+  }
+}
+

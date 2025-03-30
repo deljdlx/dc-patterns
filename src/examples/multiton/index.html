@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercices de Code</title>
+    <link rel="stylesheet" href="../assets/prism/prism.css">
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../assets/styles.css">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Multiton</h2>
+    <div class="tabs">
+        <div class="tab-buttons">
+            <button class="tab-button active" data-tab="tab1">Demo</button>
+            <button class="tab-button" data-tab="tab2">Source code</button>
+        </div>
+        <div class="tab-panels">
+            <div class="tab-panel active content" id="tab1">
+                <p>
+                    A gouvernement is composed of ministries.
+                    Ministries implements the multiton pattern.
+                </p>
+                <p>
+                    Why using the multiton pattern?
+                    Each ministry is unique and should be created only once. But we need to be able to access them from anywhere in the application. Multiton is not the best implementation, but for the sake of the example, we will use it.
+                </p>
+                <button id="createGovernmentTrigger">Create governement</button>
+                <div id="demo">
+                    <div class="panel">
+                        <h3>Ministries</h3>
+                        <div id="ministries"></div>
+                    </div>
+                    <div class= "panel">
+                        <h3>Minister</h3>
+                        <table id="minister"></table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-panel content" id="tab2">
+                <pre><code class="language-js" id="code"></code></pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script src="../assets/prism/prism.js"></script>
+<script src="../assets/ux.js"></script>
+<script src="app.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', async() => {
+        await fetch('app.js')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('code').textContent = data;
+                Prism.highlightAll();
+            });
+    });
+</script>
+
+</body>
+</html>

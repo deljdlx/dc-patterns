@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercices de Code</title>
+    <link rel="stylesheet" href="../assets/prism/prism.css">
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../assets/styles.css">
+
+
+    <style>
+
+
+
+        #devices .device {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            display: inline-block;
+            height: 100px;
+            width: 100px;
+            line-height: 100px;
+            text-align: center;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #demo {
+            display: flex;
+            gap: 8px;
+            flex-direction: row;
+            align-items: flex-start;
+        }
+        .panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            border: 1px solid #ccc;
+            padding: 8px;
+            border-radius: 5px;
+            background-color: #000;
+        }
+
+        #devices {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+    <h2>Singleton</h2>
+    <div class="tabs">
+        <div class="tab-buttons">
+            <button class="tab-button active" data-tab="tab1">Demo</button>
+            <button class="tab-button" data-tab="tab2">Source code</button>
+        </div>
+        <div class="tab-panels">
+            <div class="tab-panel active content" id="tab1">
+                <button id="addDeviceTrigger">Add Device</button>
+                <button id="resetTrigger">Reset</button>
+
+                <div id="demo">
+                    <div class="panel">
+                        <h3>Devices</h3>
+                        <div id="devices"></div>
+                    </div>
+                    <div class= "panel">
+                        <h3>Router devices</h3>
+                        <table id="routerDevices"></table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-panel content" id="tab2">
+                <pre><code class="language-js" id="code"></code></pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script src="../assets/prism/prism.js"></script>
+<script src="../assets/ux.js"></script>
+<script src="app.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', async() => {
+        await fetch('app.js')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('code').textContent = data;
+                Prism.highlightAll();
+            });
+    });
+</script>
+
+</body>
+</html>

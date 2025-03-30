@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Tableau périodique des Design Patterns</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+
+  </style>
+</head>
+<body>
+  <h1>Tableau périodique des Design Patterns</h1>
+
+  <div class="super-header-wrapper">
+    <div></div>
+    <div class="super-header">
+      <div style="grid-column: span 2">Instanciation</div>
+      <div style="grid-column: span 3">Structure</div>
+      <div style="grid-column: span 3">Comportement</div>
+    </div>
+  </div>
+
+  <div class="header-wrapper">
+    <div></div>
+    <div class="header">
+      <div>Instance Ctrl</div>
+      <div>Factory based</div>
+      <div>Composition</div>
+      <div>Adaptation</div>
+      <div>Indirection</div>
+      <div>Chain / Control</div>
+      <div>State / Event</div>
+      <div>Traversal</div>
+    </div>
+  </div>
+
+  <div id="pattern-table"></div>
+
+
+
+
+
+
+
+
+
+
+  <div class="popup-overlay" id="popup-overlay">
+    <div class="popup">
+      <div class="popup-close" onclick="document.getElementById('popup-overlay').style.display='none'">×</div>
+      <h2 id="popup-title">Titre</h2>
+      <p id="popup-description">Description ici...</p>
+    </div>
+  </div>
+
+  <script src="application.js"></script>
+  <script>
+    const table = new DesignPatternTable("#pattern-table", "patterns.json");
+    table.load();
+
+    function showPopup(title, description) {
+      document.getElementById("popup-title").textContent = title;
+      document.getElementById("popup-description").textContent = description;
+      document.getElementById("popup-overlay").style.display = "flex";
+    }
+  </script>
+</body>
+</html>

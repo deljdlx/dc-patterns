@@ -1,0 +1,27 @@
+.task {
+  background-color: #aaa8;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px;
+}
+
+
+.task h3::before {
+  margin-right: 5px;
+}
+
+.task.category-work h3::before {
+  content: "🔨";
+}
+
+.task.category-home h3::before {
+  content: "🏠";
+}
+
+.task.category-personal h3::before {
+  content: "🎉";
+}
+
+.task.category-other h3::before {
+  content: "📌";
+}

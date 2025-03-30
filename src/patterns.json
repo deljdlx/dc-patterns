@@ -1,0 +1,692 @@
+{
+    "periods": [
+        "",
+        "Fondamentaux",
+        "Classiques",
+        "Fréquents",
+        "Avancés",
+        "Contextuels",
+        "Rares"
+    ],
+    "patterns": [
+        {
+            "demo": "./examples/singleton",
+            "label": "Si",
+            "name": "Singleton",
+            "class": "inst-1",
+            "column": 1,
+            "period": 1,
+            "isRisky": true,
+            "isGof": true,
+            "description": "Le pattern Singleton garantit qu'une classe ne possède qu'une seule instance, accessible de manière globale. Il est utile quand un seul point de coordination est nécessaire, comme un gestionnaire de configuration ou un logger.",
+            "example": "Dans une maison, tous les appareils (smartphone, télé, PC…) se connectent à Internet via un seul routeur Wi-Fi. Il représente une ressource unique, partagée et accessible globalement. C'est exactement ce que fait un Singleton dans une application.",
+            "useCases": [
+                "Logger global dans une application",
+                "Gestionnaire de configuration centralisé",
+                "Gestionnaire de connexion base de données"
+            ],
+            "pitfalls": [
+                "Introduit du couplage global (difficile à tester ou à moquer)",
+                "Peut masquer des problèmes de design ou de responsabilités"
+            ],
+            "relatedPatterns": [
+                "Factory Method (pour créer des instances conditionnelles)",
+                "Multiton, si l'on veut plusieurs instances nommées",
+                "Object Pool (si on veut plusieurs instances mais réutilisées)"
+            ]
+        },
+        {
+            "demo": "./examples/multiton",
+            "label": "Mu",
+            "name": "Multiton",
+            "class": "inst-1",
+            "column": 1,
+            "period": 2,
+            "isRisky": true,
+            "isGof": false,
+            "description": "Le pattern Multiton est une variante du Singleton qui permet de gérer plusieurs instances uniques, chacune identifiée par une clé. Il garantit qu'une seule instance existe pour chaque clé donnée, ce qui en fait un registre contrôlé d'objets partagés.",
+            "example": "Imaginons un gouvernement où chaque ministère (économie, santé, éducation…) est dirigé par un seul ministre attitré. Il ne peut y avoir qu’un seul ministre par portefeuille, et chaque ministère est identifié par son domaine de compétence. <ul><li> Il existe une seule instance par \"rôle\" ou \"clé\" (comme un ministère).</li> <li>Ces instances sont centralisées et gérées depuis un “gouvernement” logiciel, qui garantit qu’un même rôle renvoie toujours la même instance</li></ul>",
+            "useCases": [
+                "Gestion d'instances par langue ou par région (ex: Locales)",
+                "Systèmes multi-base de données (une connexion par base)",
+                "Gestionnaires de ressources partagées par groupe ou contexte"
+            ],
+            "pitfalls": [
+                "Risque de mauvaise gestion de la mémoire si les clés sont dynamiques ou non maîtrisées",
+                "Peut introduire du couplage implicite, comme le Singleton",
+                "Peut compliquer les tests unitaires s'il est mal encapsulé"
+            ],
+            "relatedPatterns": [
+                "Singleton (cas particulier du Multiton avec une seule clé)",
+                "Object Pool (si les instances sont réutilisables et libérées)",
+                "Service Locator (accès global aux instances selon un identifiant)"
+            ]
+        },
+        {
+            "label": "LI",
+            "name": "Lazy Initialization",
+            "class": "inst-1",
+            "column": 1,
+            "period": 4,
+            "isGof": false,
+            "description": "Le pattern Lazy Initialization consiste à retarder la création ou l’initialisation d’un objet jusqu’au moment où il est réellement nécessaire. Cela permet de gagner en performance ou en mémoire, notamment lorsque l’opération d’initialisation est coûteuse ou rarement utilisée.",
+            "example": "Considérons une application qui affiche un profil utilisateur. Certaines données comme la photo de profil haute définition ne sont chargées qu’au moment où l’utilisateur ouvre la fiche en détail. Cela permet de ne pas consommer de ressources inutilement tant que ce n’est pas nécessaire.",
+            "useCases": [
+                "Chargement différé d’images ou de fichiers lourds dans une interface",
+                "Initialisation de connexions réseau ou base de données uniquement si besoin",
+                "Calcul d’une valeur complexe uniquement si elle est demandée"
+            ],
+            "pitfalls": [
+                "La gestion de la concurrence peut devenir complexe si plusieurs threads initialisent la ressource en même temps",
+                "Le code peut devenir plus difficile à lire ou à tester si l’état 'non initialisé' doit être vérifié souvent",
+                "Peut introduire des effets de bord inattendus si l’objet est attendu comme déjà prêt"
+            ],
+            "relatedPatterns": [
+                "Singleton (souvent combiné avec Lazy Init pour retarder la création unique)",
+                "Proxy (peut encapsuler une logique de Lazy Init pour déclencher l’accès réel à la ressource)"
+            ]
+        },
+        {
+            "label": "OP",
+            "name": "Object Pool",
+            "class": "inst-1",
+            "column": 1,
+            "period": 6,
+            "isGof": false,
+            "description": "Le pattern Object Pool vise à réutiliser un ensemble limité d’objets coûteux à créer, en les empruntant puis en les restituant à un pool partagé. Il permet de limiter les instanciations, de réduire l’usage mémoire, et d’améliorer les performances dans les systèmes à haute fréquence d'accès.",
+            "example": "Imaginons une bibliothèque avec un nombre limité d’exemplaires d’un même livre. Plutôt que de créer un nouveau livre à chaque demande, les lecteurs empruntent un exemplaire, puis le rendent une fois lu. Le système peut ainsi réutiliser les objets disponibles au lieu d’en recréer sans cesse.",
+            "useCases": [
+                "Réutilisation de connexions à une base de données dans un pool",
+                "Systèmes embarqués où le coût d’allocation mémoire est critique"
+            ],
+            "pitfalls": [
+                "La gestion du cycle de vie des objets doit être rigoureuse (libération, réinitialisation)",
+                "Peut masquer des fuites de ressources si les objets ne sont pas correctement remis dans le pool",
+                "Inutile si les objets sont légers ou peu utilisés"
+            ],
+            "relatedPatterns": [
+                "Lazy Initialization (les objets du pool peuvent être créés à la demande)",
+                "Singleton (le pool lui-même est souvent une instance unique)",
+                "Flyweight (optimise également l’usage mémoire mais avec des objets immuables partagés)"
+            ]
+        },
+        {
+            "label": "FM",
+            "name": "Factory Method",
+            "class": "inst-2",
+            "column": 2,
+            "period": 3,
+            "isGof": true,
+            "description": "Le pattern Factory Method fournit une interface pour créer des objets dans une superclasse, mais laisse les sous-classes décider de la classe concrète à instancier. Il permet de déléguer la logique de création à des sous-types spécialisés, tout en préservant l'encapsulation et l'ouverture à l'extension.",
+            "example": "Considérons une application qui génère des documents. Selon le type de document choisi (PDF, Word, HTML), une classe spécialisée sera responsable de sa création. L'interface de base déclare une méthode de création, et chaque sous-classe l'implémente selon le format souhaité. Cette approche permet de produire différents objets sans modifier le code client.",
+            "useCases": [
+                "Initialisation de services selon l'environnement (dev, prod, test)",
+                "Instancier un connecteur de base de données selon le type (MySQL, PostgreSQL)",
+                "Instancier un logger selon la technologie (Console, Fichier, Base de données)"
+            ],
+            "pitfalls": [
+                "Le lien entre interface et implémentation peut devenir flou sans convention",
+                "Peut introduire une hiérarchie complexe de classes si mal structurée",
+                "Peut représenter un surcoût inutile (overkill) dans des cas simples où une simple condition ou une fonction de fabrique suffirait"
+            ],
+            "relatedPatterns": [
+                "Abstract Factory (regroupe plusieurs Factory Methods coordonnées)",
+                "Builder (sépare la construction étape par étape de l'objet)",
+                "Prototype (utilise la duplication d'une instance existante au lieu de la créer)"
+            ]
+        },
+        {
+            "demo": "./examples/builder",
+            "label": "Bu",
+            "name": "Builder",
+            "class": "inst-2",
+            "column": 2,
+            "period": 4,
+            "isGof": true,
+            "description": "Le pattern Builder permet de construire progressivement un objet complexe, étape par étape, sans exposer sa représentation interne. Il sépare la construction de l’objet de sa représentation finale, ce qui permet d’utiliser la même logique de construction pour produire différentes variantes.",
+            "example": "Imaginons un configurateur de pizza. Plutôt que de créer une pizza directement avec un constructeur géant, on ajoute progressivement les ingrédients : pâte, sauce, fromage, garnitures. Une fois la construction terminée, on demande au builder de produire l’objet final. Cela permet une grande flexibilité et une lecture plus claire du code.",
+            "useCases": [
+                "Construction d’objets avec de nombreuses options ou paramètres facultatifs",
+                "Génération de requêtes complexes ou de documents structurés (ex : HTML, SQL, JSON)",
+                "Création d'objets immuables ou en lecture seule après assemblage"
+            ],
+            "pitfalls": [
+                "Peut introduire une complexité inutile si l’objet reste simple",
+                "Risque de confusion avec les setters classiques ou les chaînes de méthodes",
+                "L’objet final peut être invalide si la validation n’est pas centralisée dans le builder"
+            ],
+            "relatedPatterns": [
+                "Factory Method (crée un objet selon un critère, sans construction progressive)",
+                "Prototype (copie un objet existant au lieu de le construire)",
+                "Fluent Interface (souvent utilisé avec Builder pour rendre la syntaxe plus expressive)"
+            ]
+        },
+        {
+            "label": "AF",
+            "name": "Abstract Factory",
+            "class": "inst-2",
+            "column": 2,
+            "period": 6,
+            "isGof": true,
+            "description": "Le pattern Abstract Factory fournit une interface pour créer des familles d’objets liés ou dépendants, sans spécifier leurs classes concrètes. Il permet de garantir la cohérence entre des objets qui doivent fonctionner ensemble, tout en gardant une flexibilité sur leur implémentation.",
+            "example": "Imaginons un système d’interface graphique qui peut fonctionner en thème clair ou sombre. Chaque thème doit fournir ses propres versions de composants (bouton, menu, fenêtre…). Une fabrique abstraite définit les méthodes pour créer ces composants, et chaque implémentation concrète (ThèmeClairFactory, ThèmeSombreFactory) fournit une famille cohérente d’objets.",
+            "useCases": [
+                "Création de composants d’interface cohérents selon un thème ou une plateforme (Windows, macOS, mobile)",
+                "Génération de documents ou rapports avec un style homogène (PDF, HTML, Markdown...)",
+                "Initialisation de stratégies ou de services regroupés selon un environnement (développement, production, test)"
+            ],
+            "pitfalls": [
+                "Peut entraîner une prolifération de classes (interfaces, fabriques concrètes, familles d’objets...)",
+                "Peut rendre l’ajout de nouveaux types d’objets plus complexe (une méthode doit être ajoutée à toutes les fabriques)",
+                "Moins intuitif à comprendre et à mettre en œuvre que Factory Method, surtout pour des cas simples"
+            ],
+            "relatedPatterns": [
+                "Factory Method (utilisé à l’intérieur d’Abstract Factory pour créer chaque type d’objet)",
+                "Builder (utile pour la construction progressive d’objets complexes mais non liés entre eux)",
+                "Prototype (permet de cloner des familles d’objets au lieu de les fabriquer)"
+            ]
+        },
+        {
+            "label": "Pr",
+            "name": "Prototype",
+            "class": "inst-2",
+            "column": 2,
+            "period": 5,
+            "isGof": true,
+            "description": "Le pattern Prototype consiste à créer de nouveaux objets en copiant (clonant) un objet existant, plutôt que d’instancier une nouvelle classe. Il est utile lorsque la création d’un objet est coûteuse ou complexe, ou lorsqu’il faut dupliquer un état ou une configuration précise.",
+            "example": "Imaginons un outil de dessin dans lequel une forme peut être copiée-collée avec toutes ses propriétés (couleur, taille, rotation). Au lieu de tout recréer à chaque fois, on clone simplement l’objet existant. Le prototype permet d’obtenir une copie conforme, rapidement et de manière contrôlée.",
+            "useCases": [
+                "Copie rapide d’objets configurés dynamiquement à l’exécution",
+                "Duplication de formulaires, composants ou entités complexes",
+                "Création de nouveaux objets à partir de modèles ou de gabarits en mémoire"
+            ],
+            "pitfalls": [
+                "La gestion des copies profondes (deep clone) peut devenir complexe si l’objet contient des références imbriquées",
+                "Peut masquer la complexité réelle des dépendances internes si le clonage n’est pas maîtrisé",
+                "N’est utile que si la copie est réellement plus efficace que la construction"
+            ],
+            "relatedPatterns": [
+                "Builder (utile pour créer un objet de manière contrôlée au lieu de le copier)",
+                "Abstract Factory (crée des familles d’objets, alors que Prototype duplique un modèle)",
+                "Memento (également basé sur la conservation d’un état, mais avec une intention différente)"
+            ]
+        },
+        {
+            "demo": "./examples/decorator",
+            "label": "De",
+            "name": "Decorator",
+            "class": "struct-1",
+            "column": 3,
+            "period": 2,
+            "isGof": true,
+            "description": "Le pattern Decorator permet d’ajouter dynamiquement des fonctionnalités à un objet sans modifier son code ni utiliser l’héritage. Il repose sur la composition et l’implémentation partagée d’une interface commune, ce qui permet d’empiler plusieurs décorateurs pour enrichir progressivement le comportement d’un objet.",
+            "example": "Imaginons un système de notification. Un objet de base envoie un message simple, mais on souhaite pouvoir y ajouter, de façon flexible, un envoi par e-mail, puis un envoi par SMS, sans modifier la classe principale. Chaque décorateur enveloppe l’objet de base, ajoute son propre comportement, et délègue ensuite l’appel à l’objet décoré. Le message peut ainsi traverser une chaîne de couches indépendantes.",
+            "useCases": [
+                "Ajout de fonctionnalités (journalisation, cache, validation) sans toucher à la classe d’origine",
+                "Habillage d’un composant graphique avec des bordures, ombrages ou comportements interactifs",
+                "Construction d’une chaîne de traitement d’une requête avec des couches modulaires"
+            ],
+            "pitfalls": [
+                "Peut complexifier la compréhension du comportement global si trop de décorateurs sont empilés",
+                "Requiert que tous les décorateurs partagent la même interface, ce qui limite la généralisation",
+                "Peut être confondu avec l’héritage si la composition n’est pas clairement exprimée"
+            ],
+            "relatedPatterns": [
+                "Composite (structure similaire mais destinée à une hiérarchie d’objets)",
+                "Proxy (intercepte l’appel à un objet mais avec une intention différente, souvent liée au contrôle d’accès)",
+                "Chain of Responsibility (enchaîne des objets pour traiter une requête, mais dans un flux unidirectionnel)"
+            ]
+        },
+        {
+            "label": "Br",
+            "name": "Bridge",
+            "class": "struct-1",
+            "column": 3,
+            "period": 3,
+            "isGof": true,
+            "description": "Le pattern Bridge permet de séparer une abstraction de son implémentation afin que les deux puissent évoluer indépendamment. Il introduit une couche intermédiaire entre l’interface publique et les détails techniques, ce qui permet de combiner librement les variantes des deux côtés sans les multiplier par héritage.",
+            "example": "Imaginons un système de contrôle de périphériques audio. L’interface utilisateur propose des commandes (lecture, pause, stop), tandis que l’implémentation réelle peut cibler différents lecteurs (CD, MP3, streaming). Grâce au bridge, on peut associer dynamiquement n’importe quelle interface à n’importe quelle implémentation sans créer une classe par combinaison possible.",
+            "useCases": [
+                "Création de bibliothèques supportant plusieurs plateformes d’affichage (ex : interface graphique pour Windows, macOS, Linux)",
+                "Séparation entre une API publique et plusieurs moteurs de rendu ou backends",
+                "Association dynamique entre types d’objets métier et mécanismes de stockage (fichiers, base de données, mémoire)"
+            ],
+            "pitfalls": [
+                "Peut sembler complexe ou prématuré si le besoin de séparation est faible",
+                "Ajoute un niveau d’indirection qui peut ralentir la lecture du code",
+                "Risque de confusion avec Adapter si la séparation entre abstraction et implémentation n’est pas claire"
+            ],
+            "relatedPatterns": [
+                "Adapter (rend une interface compatible avec une autre, mais sans séparation structurelle anticipée)",
+                "Strategy (sépare l’algorithme utilisé, mais pas forcément la hiérarchie d’objets)",
+                "Abstract Factory (utilisé parfois pour injecter les implémentations du bridge)"
+            ]
+        },
+        {
+            "label": "Co",
+            "name": "Composite",
+            "class": "struct-1",
+            "column": 3,
+            "period": 5,
+            "isGof": true,
+            "description": "Le pattern Composite permet de structurer des objets en arborescence pour représenter une hiérarchie 'partie-tout'. Il permet de manipuler de manière uniforme des objets simples (feuilles) et des compositions d’objets (nœuds), en utilisant la même interface.",
+            "example": "Imaginons un système de gestion de fichiers. Un fichier est un élément simple, alors qu’un dossier peut contenir d’autres fichiers ou dossiers. Le pattern Composite permet de traiter de manière identique un fichier ou un dossier, par exemple en appelant une méthode `afficher()` sur n’importe quel élément de l’arborescence.",
+            "useCases": [
+                "Représentation d’arbres (ex : DOM HTML, système de fichiers, menus hiérarchiques)",
+                "Construction d’outils de dessin vectoriel avec des groupes d’objets",
+                "Modélisation de structures hiérarchiques dans des moteurs de jeu ou scènes 3D"
+            ],
+            "pitfalls": [
+                "Peut être trop abstrait si les feuilles et les nœuds ont des comportements très différents",
+                "Peut introduire du couplage entre des classes qui devraient rester distinctes",
+                "Peut rendre la validation métier plus complexe si certaines règles ne s’appliquent qu’aux feuilles"
+            ],
+            "relatedPatterns": [
+                "Decorator (utilise aussi la récursivité d’interface, mais pour ajouter du comportement)",
+                "Iterator (souvent utilisé avec Composite pour parcourir la structure)",
+                "Visitor (permet de séparer le traitement des éléments de la structure Composite)"
+            ]
+        },
+        {
+            "label": "Ad",
+            "name": "Adapter",
+            "class": "struct-2",
+            "column": 4,
+            "period": 1,
+            "isGof": true,
+            "description": "Le pattern Adapter permet de faire communiquer deux interfaces incompatibles en créant une couche d’adaptation entre elles. Il traduit ou transforme les appels d’une interface vers une autre, afin que des composants existants puissent collaborer sans modification.",
+            "example": "Imaginons un chargeur d’ordinateur avec une prise américaine, mais une prise murale européenne. Un adaptateur de prise permet de brancher l’appareil sans modifier ni la prise murale, ni le chargeur. Le pattern Adapter joue ce rôle dans le code : il adapte une interface attendue à une interface existante.",
+            "useCases": [
+                "Rendre compatible une ancienne API avec un nouveau système",
+                "Adapter une bibliothèque tierce à l’architecture d’un projet existant",
+                "Connecter différents formats de données ou protocoles dans un pipeline"
+            ],
+            "pitfalls": [
+                "Peut cacher une dette technique ou une incompatibilité plus profonde",
+                "Risque de créer du couplage implicite entre des composants initialement isolés",
+                "Ne résout pas les problèmes de sémantique : les noms peuvent être adaptés, mais pas toujours le sens"
+            ],
+            "relatedPatterns": [
+                "Bridge (également une séparation entre interface et implémentation, mais structurée dès le départ)",
+                "Decorator (utilise la même interface, mais pour enrichir le comportement)",
+                "Facade (fournit une interface simplifiée à un ensemble, mais sans adaptation fine d’un contrat)"
+            ]
+        },
+        {
+            "label": "Fa",
+            "name": "Façade",
+            "class": "struct-2",
+            "column": 4,
+            "period": 2,
+            "isRisky": true,
+            "isGof": true,
+            "description": "Le pattern Facade fournit une interface simplifiée à un ensemble de classes ou à un sous-système complexe. Il permet de réduire la dépendance du code client envers les détails internes, en regroupant les appels vers des composants internes sous une interface unifiée.",
+            "example": "Imaginons une application qui permet de regarder des films en ligne. Pour lancer une lecture, il faut démarrer le lecteur vidéo, se connecter au serveur, vérifier les droits d'accès et lancer la lecture du fichier. Une façade encapsule ces opérations derrière une méthode simple comme `lecture.film(titre)` : le client n’a pas à connaître les détails internes.",
+            "useCases": [
+                "Simplifier l’utilisation d’une API complexe ou verbeuse",
+                "Offrir un point d’entrée unifié vers différents modules internes",
+                "Encapsuler un système tiers pour limiter les effets de dépendance"
+            ],
+            "pitfalls": [
+                "Peut devenir un point unique de couplage si la façade est trop rigide ou trop complexe",
+                "Ne règle pas la complexité du système sous-jacent — elle ne fait que la masquer",
+                "Peut encourager un design monolithique si mal utilisé"
+            ],
+            "relatedPatterns": [
+                "Adapter (rend une interface compatible, tandis que Façade simplifie l’usage)",
+                "Mediator (coordonne les objets entre eux, alors que Façade les expose)",
+                "Proxy (intercepte ou contrôle l’accès, là où Façade résume les appels)"
+            ]
+        },
+        {
+            "label": "Px",
+            "name": "Proxy",
+            "class": "struct-3",
+            "column": 5,
+            "period": 3,
+            "isGof": true,
+            "description": "Le pattern Proxy fournit un substitut ou un représentant pour un autre objet, afin d’en contrôler l’accès, d’en différer l’instanciation ou d’ajouter une couche de logique supplémentaire. Il implémente la même interface que l’objet réel, ce qui permet de l’utiliser en toute transparence dans le code client.",
+            "example": "Imaginons une bibliothèque numérique dans laquelle certains livres sont volumineux. Plutôt que de charger directement tout le contenu, on utilise un proxy qui affiche le titre et charge le contenu complet uniquement si l’utilisateur ouvre le livre. Le proxy agit comme un représentant léger de l’objet complet, contrôlant son accès.",
+            "useCases": [
+                "Chargement différé (lazy loading) de ressources lourdes ou distantes",
+                "Contrôle d’accès à des objets sensibles (authentification, permissions...)",
+                "Ajout de logique réseau ou de cache autour d’un objet distant ou coûteux"
+            ],
+            "pitfalls": [
+                "Le comportement du proxy peut diverger subtilement de l’objet réel, ce qui peut surprendre",
+                "Peut introduire une complexité inutile si le coût ou l’accès à l’objet cible n’est pas un vrai problème",
+                "Peut être confondu avec Decorator ou Adapter s’il modifie trop le comportement"
+            ],
+            "relatedPatterns": [
+                "Decorator (ajoute du comportement mais sans restreindre l’accès ou différer l’instanciation)",
+                "Adapter (rend compatible une interface, sans masquer ou protéger l’accès)",
+                "Facade (simplifie l’accès, sans intercepter ni contrôler les appels)"
+            ]
+        },
+        {
+            "label": "Fl",
+            "name": "Flyweight",
+            "class": "struct-3",
+            "column": 5,
+            "period": 6,
+            "isGof": true,
+            "description": "Le pattern Flyweight vise à réduire la consommation mémoire en partageant des objets similaires à grande échelle. Il distingue les données intrinsèques (partagées et immuables) des données extrinsèques (fournies à l'exécution), permettant ainsi la réutilisation d’un petit nombre d’instances pour représenter de nombreux objets logiques.",
+            "example": "Imaginons un traitement de texte avec des milliers de lettres à l’écran. Plutôt que de créer une instance différente pour chaque 'A', 'B', 'C'… on crée une instance unique par caractère, partagée pour chaque apparition. Les positions et styles (taille, couleur) sont passés au moment du rendu. Cela économise énormément de mémoire sans altérer le fonctionnement.",
+            "useCases": [
+                "Affichage de milliers d’éléments similaires dans un rendu graphique (caractères, pixels, icônes...)",
+                "Jeux vidéo ou simulations où des objets identiques sont dupliqués à grande échelle (arbres, ennemis, particules...)",
+                "Systèmes de mise en cache d’objets immuables (typage de symboles, modèles de configuration, etc.)"
+            ],
+            "pitfalls": [
+                "Nécessite de bien distinguer ce qui est partagé de ce qui doit rester unique",
+                "Peut rendre le code plus difficile à comprendre ou maintenir en raison de cette séparation",
+                "Peu pertinent si le nombre d’objets est faible ou si les états sont trop variés pour être partagés"
+            ],
+            "relatedPatterns": [
+                "Object Pool (gère aussi la réutilisation, mais avec des objets mutables et un cycle de vie contrôlé)",
+                "Singleton (partage une instance unique, là où Flyweight partage plusieurs instances immuables)",
+                "Proxy (peut être combiné pour différer la création de flyweights lourds)"
+            ]
+        },
+        {
+            "label": "St",
+            "name": "Strategy",
+            "class": "chain-control",
+            "column": 6,
+            "period": 2,
+            "isGof": true,
+            "description": "Le pattern Strategy permet de définir une famille d’algorithmes, de les encapsuler dans des classes séparées et de les rendre interchangeables à l’exécution. Il permet d’isoler la logique métier variable et d’éviter les structures conditionnelles répétitives dans le code client.",
+            "example": "Imaginons une application de navigation qui propose plusieurs modes de calcul d’itinéraire : le plus rapide, le plus court, ou le plus écologique. Chaque mode est implémenté comme une stratégie distincte, et l’utilisateur peut en changer dynamiquement. Le code principal délègue simplement à la stratégie choisie, sans modifier sa structure.",
+            "useCases": [
+                "Choix dynamique de comportements (tri, filtrage, formatage, compression...)",
+                "Réduction de blocs `if` / `switch` dans des règles métiers complexes",
+                "Personnalisation d’algorithmes sans modifier le code appelant (ex : moteurs de règles, configuration utilisateur)"
+            ],
+            "pitfalls": [
+                "Risque de créer un trop grand nombre de classes si les stratégies sont nombreuses",
+                "Peut entraîner une fragmentation excessive du code si la logique de chaque stratégie est très courte",
+                "Nécessite une interface claire et cohérente pour garantir l’interchangeabilité"
+            ],
+            "relatedPatterns": [
+                "Template Method (définit le squelette de l’algorithme avec des étapes personnalisables)",
+                "State (structure similaire, mais orientée autour de transitions d’état)",
+                "Command (permet aussi d'encapsuler des actions, mais orienté exécution plutôt qu’algorithme)"
+            ]
+        },
+        {
+            "label": "CR",
+            "name": "Chain of Responsibility",
+            "class": "chain-control",
+            "column": 6,
+            "period": 3,
+            "isGof": true,
+            "description": "Le pattern Chain of Responsibility permet de transmettre une requête à travers une chaîne d’objets jusqu’à ce qu’un d’eux la traite. Chaque objet de la chaîne peut choisir de traiter la requête, de la modifier, ou de la transmettre à l’élément suivant. Cela favorise un découplage entre l’émetteur de la requête et son ou ses gestionnaires potentiels.",
+            "example": "Imaginons un système de support technique. Lorsqu’un utilisateur soumet une demande, elle est d’abord traitée par le support de niveau 1. Si ce dernier ne peut pas répondre, la requête est transmise au niveau 2, puis au niveau 3, etc. Chaque niveau peut intervenir ou laisser la requête passer. Le pattern reflète exactement cette logique d’escalade progressive.",
+            "useCases": [
+                "Systèmes de gestion d'événements ou de filtres (middleware HTTP, pipelines de traitement)",
+                "Validation de formulaires avec plusieurs règles appliquées en cascade",
+                "Gestion de permissions ou d’autorisations avec escalade (modérateur, admin...)"
+            ],
+            "pitfalls": [
+                "La chaîne peut être difficile à suivre ou à debugger si elle est longue ou dynamique",
+                "L’ordre des éléments dans la chaîne peut avoir un impact critique sur le comportement",
+                "Peut masquer l’absence de traitement si aucun maillon n’intervient"
+            ],
+            "relatedPatterns": [
+                "Decorator (structure enchaînée, mais pour enrichir plutôt que filtrer)",
+                "Command (peut être intégré dans une chaîne pour exécuter dynamiquement des actions)",
+                "Mediator (centralise la coordination alors que Chain distribue le contrôle)"
+            ]
+        },
+        {
+            "label": "Cm",
+            "name": "Command",
+            "class": "chain-control",
+            "column": 6,
+            "period": 4,
+            "isGof": true,
+            "description": "Le pattern Command encapsule une action ou une opération sous forme d’objet, permettant de paramétrer des invocations, de les enregistrer, de les annuler ou de les combiner. Il découple ainsi l’émetteur d'une commande de celui ou celle qui l’exécute, et permet une gestion flexible des opérations.",
+            "example": "Imaginons une télécommande programmable. Chaque bouton déclenche une commande : allumer la lumière, ouvrir les rideaux, lancer la musique. Chaque commande est un objet que l’on peut stocker, annuler ou réexécuter. Le code de la télécommande ne connaît pas les détails de chaque action, il ne fait qu’invoquer la commande associée.",
+            "useCases": [
+                "Création d’un historique d’actions avec possibilité d’annuler/refaire (undo/redo)",
+                "Programmation ou mise en file d’attente d’actions (scheduling, batch)",
+                "Interface graphique où chaque interaction déclenche une action encapsulée"
+            ],
+            "pitfalls": [
+                "Peut entraîner une multiplication d’objets pour chaque action élémentaire",
+                "Nécessite souvent la gestion explicite d’un contexte ou d’un récepteur",
+                "Ajoute une couche d’abstraction qui peut sembler inutile pour des actions très simples"
+            ],
+            "relatedPatterns": [
+                "Strategy (encapsule un algorithme, tandis que Command encapsule une opération)",
+                "Memento (peut être combiné avec Command pour ajouter un état restaurable à une commande)",
+                "Chain of Responsibility (peut exécuter ou relayer une commande dans une chaîne de traitement)"
+            ]
+        },
+        {
+            "label": "Me",
+            "name": "Mediator",
+            "class": "behav-3",
+            "column": 6,
+            "period": 5,
+            "isGof": true,
+            "description": "Le pattern Mediator centralise les communications entre plusieurs objets afin de réduire leurs dépendances directes. Chaque objet communique avec le médiateur plutôt qu’avec les autres directement, ce qui simplifie les interactions complexes et améliore la maintenabilité.",
+            "example": "Imaginons un avion avec plusieurs instruments de bord : altimètre, vitesse, pilotage automatique, gestion carburant… Plutôt que de laisser chaque instrument parler aux autres, un contrôleur central (le médiateur) coordonne leurs interactions. Chaque module informe le médiateur de ses changements, et celui-ci décide des ajustements à transmettre aux autres.",
+            "useCases": [
+                "Systèmes avec de nombreux composants interdépendants (UI complexes, simulations...)",
+                "Coordination d’interactions dans un formulaire avec champs liés",
+                "Communication entre modules dans des architectures modulaires ou plugin-based"
+            ],
+            "pitfalls": [
+                "Le médiateur peut devenir trop central et contenir trop de logique, se transformant en 'god object'",
+                "Peut masquer les responsabilités réelles des composants",
+                "Risque de rigidité si les canaux d’interaction sont trop codés en dur"
+            ],
+            "relatedPatterns": [
+                "Observer (permet la communication indirecte mais via notifications plutôt que coordination)",
+                "Facade (fournit une interface simplifiée mais pas un système de routage)",
+                "Command (peut être utilisé avec Mediator pour structurer les messages transmis)"
+            ]
+        },
+        {
+            "label": "TM",
+            "name": "Template Method",
+            "class": "chain-control",
+            "column": 6,
+            "period": 6,
+            "isGof": true,
+            "description": "Le pattern Template Method définit la structure d’un algorithme dans une classe abstraite, tout en laissant certaines étapes aux sous-classes. Il permet de préserver un enchaînement fixe tout en rendant personnalisables certaines étapes spécifiques.",
+            "example": "Imaginons une procédure de cuisson dans une cuisine : allumer le four, cuire, puis éteindre. La structure globale reste la même, mais chaque plat (pizza, gâteau, pain) définit ses propres variantes de cuisson. Le modèle de base est immuable, seules certaines étapes sont spécialisées.",
+            "useCases": [
+                "Définir une séquence d’opérations fixes avec des étapes personnalisables (initialisation, traitement, nettoyage...)",
+                "Standardiser des processus métier tout en permettant des variantes locales",
+                "Encapsuler des workflows partagés dans des systèmes de traitement ou de validation"
+            ],
+            "pitfalls": [
+                "Peut devenir rigide si trop d'étapes sont codées en dur",
+                "Favorise l’héritage, ce qui peut poser problème dans les systèmes préférant la composition",
+                "Peut être moins flexible que Strategy si les variantes sont nombreuses ou dynamiques"
+            ],
+            "relatedPatterns": [
+                "Strategy (permet de changer l’algorithme entier, tandis que Template Method en fixe la structure)",
+                "Hook Method (technique utilisée dans Template pour permettre la personnalisation d’étapes)",
+                "Factory Method (peut être utilisé comme étape d’un Template pour créer un objet)"
+            ]
+        },
+        {
+            "label": "Vi",
+            "name": "Visitor",
+            "class": "behav-4",
+            "column": 8,
+            "period": 5,
+            "isGof": true,
+            "description": "Le pattern Visitor permet de séparer un algorithme d’un objet sur lequel il opère, en plaçant cet algorithme dans une classe externe. Il permet ainsi d’ajouter de nouveaux comportements à des objets existants sans modifier leur structure, notamment dans des hiérarchies complexes.",
+            "example": "Imaginons un système de fichiers dans lequel chaque type d’élément (fichier, dossier, lien) accepte un 'visiteur' qui réalise une opération : calcul de taille, export, ou vérification. Chaque visiteur implémente une logique différente sans modifier les classes des éléments eux-mêmes. Chaque élément 'accepte' un visiteur, et délègue l’appel approprié.",
+            "useCases": [
+                "Ajout d’opérations multiples sur une structure complexe sans toucher aux classes existantes",
+                "Séparation des préoccupations (traitements métiers, logs, statistiques...) dans un arbre d’objets",
+                "Traversée de structures composites (arbres, graphes...) avec logique spécialisée selon le type"
+            ],
+            "pitfalls": [
+                "Nécessite que toutes les classes de la hiérarchie soient connues et modifiables pour accepter un visiteur",
+                "Peut être rigide si l’arborescence évolue fréquemment (chaque ajout requiert une mise à jour de tous les visiteurs)",
+                "La logique des visiteurs peut devenir difficile à maintenir si elle se multiplie ou s’éparpille"
+            ],
+            "relatedPatterns": [
+                "Composite (souvent utilisé en conjonction avec Visitor pour représenter les structures à traverser)",
+                "Double Dispatch (technique utilisée par Visitor pour invoquer la méthode appropriée selon le type réel)",
+                "Interpreter (les visiteurs peuvent être utilisés pour exécuter ou transformer une grammaire)"
+            ]
+        },
+        {
+            "label": "It",
+            "name": "Iterator",
+            "class": "behav-4",
+            "column": 8,
+            "period": 2,
+            "isGof": true,
+            "description": "Le pattern Iterator fournit un moyen standard de parcourir les éléments d’une collection sans exposer sa structure interne. Il encapsule la logique de navigation (suivant, précédent, fin...) et permet au code client de traiter toutes les collections de manière uniforme.",
+            "example": "Imaginons une bibliothèque contenant différents types de collections : des livres dans une étagère, des DVD dans une boîte, des journaux dans un classeur. Plutôt que de manipuler chaque type différemment, on fournit un 'itérateur' qui permet de parcourir les éléments un à un, peu importe la structure sous-jacente.",
+            "useCases": [
+                "Accès séquentiel aux éléments d’une liste, d’un arbre ou d’une base de données",
+                "Uniformisation de la navigation à travers des structures hétérogènes",
+                "Parcours d’éléments avec possibilité d’interruption ou de filtrage à la volée"
+            ],
+            "pitfalls": [
+                "Peut introduire un état interne complexe à gérer si l’itération est modifiable ou concurrente",
+                "Certaines structures non linéaires (graphes, arbres) nécessitent des itérateurs spécialisés",
+                "Peut masquer des problèmes de performance si la collection est volumineuse ou dynamique"
+            ],
+            "relatedPatterns": [
+                "Composite (les itérateurs sont souvent utilisés pour parcourir une structure arborescente)",
+                "Visitor (peut être utilisé en complément pour effectuer un traitement sur chaque élément)",
+                "Generator (dans certains langages, offre une alternative plus flexible à l’itération classique)"
+            ]
+        },
+        {
+            "label": "It",
+            "name": "Iterator",
+            "class": "behav-4",
+            "column": 8,
+            "period": 2,
+            "isGof": true,
+            "description": "Le pattern Iterator fournit un moyen standard de parcourir les éléments d’une collection sans exposer sa structure interne. Il encapsule la logique de navigation (suivant, précédent, fin...) et permet au code client de traiter toutes les collections de manière uniforme.",
+            "example": "Imaginons une bibliothèque contenant différents types de collections : des livres dans une étagère, des DVD dans une boîte, des journaux dans un classeur. Plutôt que de manipuler chaque type différemment, on fournit un 'itérateur' qui permet de parcourir les éléments un à un, peu importe la structure sous-jacente.",
+            "useCases": [
+                "Accès séquentiel aux éléments d’une liste, d’un arbre ou d’une base de données",
+                "Uniformisation de la navigation à travers des structures hétérogènes",
+                "Parcours d’éléments avec possibilité d’interruption ou de filtrage à la volée"
+            ],
+            "pitfalls": [
+                "Peut introduire un état interne complexe à gérer si l’itération est modifiable ou concurrente",
+                "Certaines structures non linéaires (graphes, arbres) nécessitent des itérateurs spécialisés",
+                "Peut masquer des problèmes de performance si la collection est volumineuse ou dynamique"
+            ],
+            "relatedPatterns": [
+                "Composite (les itérateurs sont souvent utilisés pour parcourir une structure arborescente)",
+                "Visitor (peut être utilisé en complément pour effectuer un traitement sur chaque élément)",
+                "Generator (dans certains langages, offre une alternative plus flexible à l’itération classique)"
+            ]
+        },
+        {
+            "label": "In",
+            "name": "Interpreter",
+            "class": "behav-4",
+            "column": 8,
+            "period": 6,
+            "isGof": true,
+            "description": "Le pattern Interpreter définit une grammaire pour un langage spécifique et fournit un interpréteur pour analyser et évaluer des phrases de ce langage. Il est particulièrement utile pour modéliser des langages simples, des expressions logiques ou des règles métier déclaratives.",
+            "example": "Imaginons un système de filtrage d’e-mails qui utilise des règles comme \"sujet contient 'urgent' ET expéditeur est 'chef'\". Chaque élément de la règle (mot-clé, opérateur logique) est représenté comme un objet, et l’ensemble peut être interprété sur chaque message. Le système évalue la règle via l’interprétation d’un arbre d’objets syntaxiques.",
+            "useCases": [
+                "Évaluation d’expressions mathématiques ou logiques simples",
+                "Systèmes de règles métier définies dynamiquement (ex : filtres, moteurs de règles)",
+                "Langages internes spécifiques (DSL) pour configuration, recherche, requêtage..."
+            ],
+            "pitfalls": [
+                "Peu adapté aux langages complexes (le code devient difficile à maintenir ou à optimiser)",
+                "Peut entraîner la création d’un grand nombre de classes pour modéliser chaque symbole",
+                "La récursivité peut nuire aux performances pour des expressions volumineuses"
+            ],
+            "relatedPatterns": [
+                "Composite (souvent utilisé pour structurer les expressions syntaxiques)",
+                "Visitor (permet d’appliquer différentes actions sur une structure interprétable)",
+                "Builder (peut être utilisé pour construire dynamiquement l’arbre syntaxique)"
+            ]
+        },
+        {
+            "label": "Ob",
+            "name": "Observer",
+            "class": "behav-3",
+            "column": 7,
+            "period": 1,
+            "isGof": true,
+            "description": "Le pattern Observer permet à un objet (le sujet) de notifier automatiquement un ensemble d’observateurs lorsqu’un changement d’état survient. Il favorise un découplage entre la source d’un événement et les objets qui y réagissent, en instaurant une relation de publication/abonnement.",
+            "example": "Imaginons une station météo. Lorsqu’un changement de température est détecté, la station en informe automatiquement tous les écrans ou applications connectés. Chaque observateur s’est abonné aux mises à jour, et reçoit la notification sans avoir à interroger la station en continu.",
+            "useCases": [
+                "Systèmes de notification en temps réel (UI, monitoring, événement métier...)",
+                "Mécanismes de binding dans des interfaces graphiques (ex : MVVM)",
+                "Gestion d’événements dans des architectures événementielles ou réactives"
+            ],
+            "pitfalls": [
+                "Risque de fuites mémoire si les observateurs ne se désabonnent pas correctement",
+                "Peut introduire un comportement difficile à tracer dans des systèmes dynamiques",
+                "L’ordre d’appel des observateurs n’est pas toujours garanti (effets de bord imprévisibles)"
+            ],
+            "relatedPatterns": [
+                "Mediator (centralise la communication entre objets, là où Observer la diffuse)",
+                "Event Bus / Pub-Sub (versions distribuées ou plus génériques du principe d’abonnement)",
+                "Reactive Programming (approche moderne qui repose largement sur ce principe)"
+            ]
+        },
+        {
+            "label": "Mm",
+            "name": "Memento",
+            "class": "behav-3",
+            "column": 7,
+            "period": 4,
+            "isGof": true,
+            "description": "Le pattern Memento permet de capturer et de restaurer l’état interne d’un objet sans violer son encapsulation. Il est utilisé pour implémenter des mécanismes d’annulation (undo), de restauration ou de navigation dans l’historique, tout en gardant l’objet principal indépendant de la logique de sauvegarde.",
+            "example": "Imaginons un éditeur de texte avec une fonction Annuler. À chaque modification, l’état du document est sauvegardé dans un 'memento'. Si l’utilisateur souhaite revenir en arrière, l’éditeur restaure l’état précédent. Le memento encapsule l’état, sans exposer les détails internes au code appelant.",
+            "useCases": [
+                "Fonctionnalité d’annulation/refaire (undo/redo) dans une interface ou un éditeur",
+                "Navigation dans l’historique d’un processus ou d’un document",
+                "Sauvegarde d’états intermédiaires pour permettre des rollback (transactions, jeux, simulations)"
+            ],
+            "pitfalls": [
+                "Peut consommer beaucoup de mémoire si les mementos sont trop nombreux ou trop volumineux",
+                "La restauration doit être soigneusement gérée pour éviter des incohérences d’état",
+                "Peut introduire du couplage implicite si le memento dépend trop fortement de la structure interne"
+            ],
+            "relatedPatterns": [
+                "Command (souvent combiné avec Memento pour annuler une action)",
+                "Prototype (duplique un état, mais sans mécanisme de restauration associé)",
+                "Caretaker (composant responsable de stocker et de gérer les mementos)"
+            ]
+        },
+        {
+            "label": "St*",
+            "name": "State",
+            "class": "behav-3",
+            "column": 7,
+            "period": 5,
+            "isGof": true,
+            "description": "Le pattern State permet de modifier dynamiquement le comportement d’un objet en fonction de son état interne, en déléguant ce comportement à des objets représentant chacun un état. Il remplace les structures conditionnelles complexes par des classes distinctes et encapsule les transitions entre états.",
+            "example": "Imaginons une porte automatique. Elle peut être ouverte, fermée ou en train de se verrouiller. Chaque état définit les comportements possibles (ouvrir, fermer, alarme...). Le code de la porte ne contient pas de conditions `if/else`, il délègue simplement aux objets représentant chaque état. Lors d’un changement, l’état actuel est remplacé.",
+            "useCases": [
+                "Automates à états finis (ex : distributeurs automatiques, machines à laver, systèmes embarqués)",
+                "Interfaces utilisateur avec comportement dépendant du contexte (édition, lecture, verrouillage...)",
+                "Gestion d’états complexes dans des workflows métier ou des systèmes transactionnels"
+            ],
+            "pitfalls": [
+                "Peut introduire un grand nombre de classes si les états sont nombreux",
+                "Les transitions explicites entre états doivent être soigneusement gérées pour éviter les incohérences",
+                "Risque de complexité excessive si le comportement ne varie que très peu selon l’état"
+            ],
+            "relatedPatterns": [
+                "Strategy (structure similaire, mais les stratégies sont indépendantes de l’état courant)",
+                "Memento (permet de revenir à un état antérieur, mais ne définit pas le comportement par état)",
+                "Observer (souvent utilisé avec State pour réagir à des changements d’état)"
+            ]
+        }
+    ]
+}

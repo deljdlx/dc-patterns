@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercices de Code</title>
+    <link rel="stylesheet" href="../assets/prism/prism.css">
+
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../assets/styles.css">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Builder</h2>
+    <div class="tabs">
+        <div class="tab-buttons">
+            <button class="tab-button active" data-tab="tab1">Demo</button>
+            <button class="tab-button" data-tab="tab2">Source code</button>
+        </div>
+        <div class="tab-panels">
+            <div class="tab-panel active content" id="tab1">
+                <div id="demo">
+                    <div class="panel">
+                        <h3>Customize my pizza</h3>
+
+                        <h4>Base</h4>
+                        <div id="base">
+
+                            <label class="base"><input value="tomato" type="radio" name="base" checked/><span>Tomato</span></label>
+                            <label class="base"><input value="cream" type="radio" name="base"/><span>Cream</span></label>
+                        </div>
+
+                        <h4>Ingredients</h4>
+                        <div id="ingredients">
+                            <label class="ingredient"><input value="salmon" type="checkbox"/><span>Salmon</span></label>
+                            <label class="ingredient"><input value="tuna" type="checkbox"/><span>Tuna</span></label>
+                            <label class="ingredient"><input value="ham" type="checkbox"/><span>Ham</span></label>
+                            <label class="ingredient"><input value="merguez" type="checkbox"/><span>Merguez</span></label>
+                            <label class="ingredient"><input value="bacon" type="checkbox"/><span>Bacon</span></label>
+                            <label class="ingredient"><input value="beef" type="checkbox"/><span>Beef</span></label>
+
+                            <label class="ingredient"><input value="emmental" type="checkbox"/><span>Emmental</span></label>
+                            <label class="ingredient"><input value="parmesan" type="checkbox"/><span>Parmesan</span></label>
+
+                            <label class="ingredient"><input value="pepperoni" type="checkbox"/><span>Pepperoni</span></label>
+                            <label class="ingredient"><input value="tomatoes" type="checkbox"/><span>Tomatoes</span></label>
+                            <label class="ingredient"><input value="mushrooms" type="checkbox"/><span>Mushrooms</span></label>
+                            <label class="ingredient"><input value="olives" type="checkbox"/><span>Olives</span></label>
+                            <label class="ingredient"><input value="onions" type="checkbox"/><span>Onions</span></label>
+
+                            <label class="ingredient"><input value="basil" type="checkbox"/><span>Basil</span></label>
+                            <label class="ingredient"><input value="oregano" type="checkbox"/><span>Oregano</span></label>
+                            <label class="ingredient"><input value="pineapple" type="checkbox"/><span>💀 Pineapple</span></label>
+                        </div>
+                        <div>
+                            <button id="createPizza">Create pizza</button>
+                        </div>
+                    </div>
+                    <div class= "panel">
+                        <h3>Pizza</h3>
+                        <div id="steps"></div>
+
+
+                        <div id="pizza-illustration">
+                            <div class="pizza__base">
+                                <div id="pizza"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="tab-panel content" id="tab2">
+                <pre><code class="language-js" id="code"></code></pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script src="../assets/prism/prism.js"></script>
+<script src="../assets/ux.js"></script>
+<script src="app.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', async() => {
+        await fetch('app.js')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('code').textContent = data;
+                Prism.highlightAll();
+            });
+    });
+</script>
+
+</body>
+</html>
