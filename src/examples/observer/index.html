@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercices de Code</title>
+    <link rel="stylesheet" href="../assets/prism/prism.css">
+
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../assets/styles.css">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Observer</h2>
+    <div class="tabs">
+        <div class="tab-buttons">
+            <button class="tab-button active" data-tab="tab1">Demo</button>
+            <button class="tab-button" data-tab="tab2">Source code</button>
+        </div>
+        <div class="tab-panels">
+            <div class="tab-panel active content" id="tab1">
+                <p>
+
+                </p>
+                <div id="demo">
+                    <div class="panel">
+                        <h3>Observers</h3>
+                        <div>
+                            <form id="observer-form">
+                                <fieldset>
+                                    <label>
+                                        <span>Observer name: </span>
+                                        <input type="text" id="observer-name" value="New observer" onfocus="this.select()">
+                                    </label>
+                                    <label>
+                                        <span>Message on click: </span>
+                                        <input type="text" id="observer-message" value="Click" onfocus="this.select()">
+                                    </label>
+                                    <label>
+                                        <span>Listen event: </span>
+                                        <select id="observer-event">
+                                            <option value="increment">Increment</option>
+                                            <option value="decrement">Decrement</option>
+                                            <option value="change">Change (increment and decrement)</option>
+                                        </select>
+
+                                    </label>
+                                    <button id="addTask">Add observer</button>
+                                </fieldset>
+
+                            </form>
+                        </div>
+                        <h3>List</h3>
+                        <div id="observers"></div>
+                    </div>
+                    <div class= "panel">
+                        <div id="container-container">
+                            <span id="counter">0</span>
+                        </div>
+                        <div id="buttons-container">
+                            <button id="incrementTrigger">➕</button>
+                            <button id="decrementTrigger">➖</button>
+                        </div>
+                        <div>
+                            <h3>Logs <button id="clearLogs">Clear</button></h3>
+                            <div id="logs"></div>
+
+                        </div>
+                    </div>
+                </div>
+                <div>
+
+                </div>
+            </div>
+            <div class="tab-panel content" id="tab2">
+                <pre><code class="language-js" id="code"></code></pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script src="../assets/prism/prism.js"></script>
+<script src="../assets/ux.js"></script>
+<script src="app.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', async() => {
+        await fetch('app.js')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('code').textContent = data;
+                Prism.highlightAll();
+            });
+    });
+</script>
+
+</body>
+</html>

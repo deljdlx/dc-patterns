@@ -614,6 +614,7 @@
             ]
         },
         {
+            "demo": "./examples/observer",
             "label": "Ob",
             "name": "Observer",
             "class": "behav-3",
