@@ -389,6 +389,7 @@
             ]
         },
         {
+            "demo": "./examples/strategy",
             "label": "St",
             "name": "Strategy",
             "class": "chain-control",
