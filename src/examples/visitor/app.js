@@ -1,4 +1,11 @@
-// ⚠️ We are using a decorator pattern to add some useful methods to the DOM elements.
+// We are using a decorator pattern to add some useful methods to the DOM elements.
+// ⚠️⚠️⚠️ In a strict GoF Visitor pattern, each element type (e.g. ParagraphNode, TitleNode)
+// would be its own class implementing an accept(visitor) method,
+// and the Visitor would have visitParagraph(), visitTitle(), etc.
+//
+// Here we simplify by using a single DomElementDecorator and a generic visit() method.
+// This makes the demo lighter in JavaScript, but slightly deviates from the "pure" pattern.
+
 class DomElementDecorator
 {
     element;
