@@ -71,11 +71,11 @@ class CounterProxy {
 
 document.addEventListener('DOMContentLoaded', () => {
     const counterElement = document.querySelector('#counter');
-    const counter = new Counter();
+    const counter = new Counter(counterElement);
 
     const lockToggle = document.querySelector('#lock');
 
-    const proxy = new CounterProxy(counter, counterElement);
+    const proxy = new CounterProxy(counterElement, counter);
     proxy.render();
 
     lockToggle.addEventListener('click', () => {
