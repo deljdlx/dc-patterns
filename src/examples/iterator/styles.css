@@ -1,0 +1,43 @@
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.controls {
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+button {
+  padding: 0.5em 1em;
+  font-weight: bold;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+button:hover {
+  background: #0056b3;
+}
+
+.matrix {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+.cell {
+  width: 40px;
+  height: 40px;
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  transition: background-color 0.2s ease;
+}
+
+.cell.active {
+  background: #4caf50;
+}

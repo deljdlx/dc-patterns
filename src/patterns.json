@@ -543,6 +543,7 @@
             ]
         },
         {
+            "demo": "./examples/iterator",
             "label": "It",
             "name": "Iterator",
             "class": "behav-4",
