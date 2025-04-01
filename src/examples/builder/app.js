@@ -17,6 +17,12 @@ class Pizza
     }
 }
 
+
+// ⚠️ In the GoF pattern, a Director would typically orchestrate the build steps.
+// In this case, it's overkill: the user acts as the director by interacting with the UI.
+// The PizzaBuilder already encapsulates both the construction logic and UX feedback,
+// which is perfectly suited for this kind of user-driven demo.
+
 class PizzaBuilder {
 
     pizza;
