@@ -23,6 +23,7 @@ class Counter {
 
 // Proxy ===========================
 // ⚠️ With js, there is a native Proxy object that can be used to create a proxy object. But in this case, we are using a class for the sake of the example.
+// ⚠️⚠️ for this example, the proxy is not a real proxy pattern, it's just a way to show how a proxy could be used in a real case.
 class CounterProxy {
 
     counter;
