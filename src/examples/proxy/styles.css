@@ -1,0 +1,41 @@
+#container-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#counter {
+  position: relative;
+  display: flex;
+  width: 100px;
+  height: 100px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 24px;
+  background-color: #888;
+}
+
+
+#counter.disabled {
+  background: #888 !important;
+}
+
+#counter.disabled::before {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  content: '🔒';
+}
+
+
+
+#counter.even {
+  background: #0ff;
+}
+
+#counter.odd {
+  background: #f0f;
+}

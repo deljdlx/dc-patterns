@@ -339,6 +339,7 @@
             ]
         },
         {
+            "demo": "./examples/proxy",
             "label": "Px",
             "name": "Proxy",
             "class": "struct-3",
@@ -515,6 +516,7 @@
             ]
         },
         {
+            "demo": "./examples/visitor",
             "label": "Vi",
             "name": "Visitor",
             "class": "behav-4",

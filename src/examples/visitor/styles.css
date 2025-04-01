@@ -1,0 +1,38 @@
+.triggers {
+  display: flex;
+  gap: 8px;
+}
+
+.triggers button {
+  flex: 1;
+}
+
+#preview-container {
+  margin-top: 1rem;
+}
+
+.toc-H1 {
+  font-weight: bold;
+}
+
+.toc-H2 {
+  margin-left: 1rem;
+}
+
+.toc-H3 {
+  margin-left: 2rem;
+}
+
+.toc-H4 {
+  margin-left: 3rem;
+}
+
+
+.block {
+  border: 1px solid #f0f;
+  margin: 4px;
+}
+
+.block .block-content {
+
+}
