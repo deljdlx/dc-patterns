@@ -1,0 +1,90 @@
+{
+    "name": "Beers",
+    "children": [
+        {
+            "name": "Lager",
+            "children": [
+                {
+                    "name": "Pilsner",
+                    "children": [
+                        {
+                            "name": "Heineken"
+                        },
+                        {
+                            "name": "Stella Artois"
+                        },
+                        {
+                            "name": "Pilsner Urquell"
+                        }
+                    ]
+                },
+                {
+                    "name": "Vienna",
+                    "children": [
+                        {
+                            "name": "Negra Modelo"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Ale",
+            "children": [
+                {
+                    "name": "Pale Ale",
+                    "children": [
+                        {
+                            "name": "American Pale Ale",
+                            "children": [
+                                {
+                                    "name": "Sierra Nevada Pale Ale"
+                                },
+                                {
+                                    "name": "Goose Island Pale Ale"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "English Pale Ale",
+                            "children": [
+                                {
+                                    "name": "Bass Pale Ale"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "IPA",
+                    "children": [
+                        {
+                            "name": "New England IPA",
+                            "children": [
+                                {
+                                    "name": "Hazy Little Thing (Sierra Nevada)"
+                                },
+                                {
+                                    "name": "Julius (Tree House Brewing)"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Stout",
+            "children": [
+                {
+                    "name": "Dry Stout",
+                    "children": [
+                        {
+                            "name": "Guinness"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

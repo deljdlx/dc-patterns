@@ -263,6 +263,7 @@
             ]
         },
         {
+            "demo": "./examples/composite",
             "label": "Co",
             "name": "Composite",
             "class": "struct-1",
