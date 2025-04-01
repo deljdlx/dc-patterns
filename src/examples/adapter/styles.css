@@ -1,0 +1,26 @@
+#glass-container {
+  width: 100px;
+  height: 200px;
+  border-radius: 4px 4px 10px 10px;
+  border: 2px solid #aaa;
+  position: relative;
+  background: #fff3;
+}
+.glass {
+  position: absolute;
+  bottom: 0;
+  height: calc(100% - 30px);
+  width: 100%;
+}
+
+.columns {
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}

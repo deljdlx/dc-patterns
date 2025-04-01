@@ -1,0 +1,71 @@
+{
+    "Whiskey Sour": {
+        "name": "Whiskey Sour",
+        "ingredients": [
+            {
+                "name": "Whiskey",
+                "amount": 2,
+                "unit": "oz",
+                "color": "#b87333"
+            },
+            {
+                "name": "Lemon Juice",
+                "amount": 0.75,
+                "unit": "oz",
+                "color": "#fdfd96"
+            },
+            {
+                "name": "Sugar Syrup",
+                "amount": 0.5,
+                "unit": "oz",
+                "color": "#ffffff"
+            }
+        ]
+    },
+    "Margarita": {
+        "name": "Margarita",
+        "ingredients": [
+            {
+                "name": "Tequila",
+                "amount": 2,
+                "unit": "oz",
+                "color": "#d4af37"
+            },
+            {
+                "name": "Triple Sec",
+                "amount": 1,
+                "unit": "oz",
+                "color": "#ffb347"
+            },
+            {
+                "name": "Lime Juice",
+                "amount": 1,
+                "unit": "oz",
+                "color": "#c1f08a"
+            }
+        ]
+    },
+    "Negroni": {
+        "name": "Negroni",
+        "ingredients": [
+            {
+                "name": "Gin",
+                "amount": 1,
+                "unit": "oz",
+                "color": "#e0e0e0"
+            },
+            {
+                "name": "Campari",
+                "amount": 1,
+                "unit": "oz",
+                "color": "#ff4c4c"
+            },
+            {
+                "name": "Vermouth",
+                "amount": 1,
+                "unit": "oz",
+                "color": "#8b0000"
+            }
+        ]
+    }
+}
